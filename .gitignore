@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+.env.local
+.env.*.local
+# Convex generated — keep stub .ts files, ignore runtime outputs
+convex/_generated/*.js
+convex/_generated/*.d.ts
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
