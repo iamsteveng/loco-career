@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Git Workflow Rules
+
+- **Never push directly to `main`.** All changes must go through a pull request.
+- Always create a feature branch for any change, commit to it, push the branch, and open a PR.
+- `main` is only updated by merging a PR — never by direct push.
+
 ## Commands
 
 ```bash
