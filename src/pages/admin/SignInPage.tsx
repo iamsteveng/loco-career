@@ -9,11 +9,11 @@ export function SignInPage() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { signIn } = useAuthActions();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [focusedField, setFocusedField] = useState<"email" | "password" | null>(null);
+  const [focusedField, setFocusedField] = useState<"username" | "password" | null>(null);
 
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
@@ -26,10 +26,10 @@ export function SignInPage() {
     setError("");
     setSubmitting(true);
     try {
-      await signIn("password", { email, password, flow: "signIn" });
+      await signIn("password", { username, password, flow: "signIn" });
       void navigate("/admin");
     } catch {
-      setError("電郵或密碼不正確，請重試。");
+      setError("用戶名稱或密碼不正確，請重試。");
     } finally {
       setSubmitting(false);
     }
@@ -115,21 +115,21 @@ export function SignInPage() {
                 color: "#374151",
               }}
             >
-              電郵地址
+              用戶名稱
             </span>
             <input
-              id="email"
-              name="email"
-              type="email"
+              id="username"
+              name="username"
+              type="text"
               required
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => setFocusedField("email")}
+              autoComplete="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              onFocus={() => setFocusedField("username")}
               onBlur={() => setFocusedField(null)}
-              placeholder="admin@example.com"
+              placeholder="admin"
               aria-invalid={!!error}
-              style={getInputStyle(focusedField === "email")}
+              style={getInputStyle(focusedField === "username")}
             />
           </label>
 
