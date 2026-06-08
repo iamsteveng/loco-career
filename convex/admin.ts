@@ -1,6 +1,6 @@
-import { mutation, query } from "./_generated/server";
+import { internalAction, mutation, query } from "./_generated/server";
 import { v } from "convex/values";
-import { getAuthUserId } from "@convex-dev/auth/server";
+import { createAccount, getAuthUserId } from "@convex-dev/auth/server";
 
 const jobFields = {
   slug: v.string(),
@@ -210,5 +210,26 @@ export const seed = mutation({
     }
 
     return { inserted: SEED_JOBS.length };
+  },
+});
+
+// Run once from the Convex dashboard to create the initial admin account.
+// username: admin  password: admin123
+export const seedAdmin = internalAction({
+  args: {},
+  handler: async (ctx) => {
+    try {
+      await createAccount(ctx, {
+        provider: "password",
+        account: { id: "admin@loco.admin", secret: "admin123" },
+        profile: { email: "admin@loco.admin" },
+      });
+      return { status: "created" as const };
+    } catch (e) {
+      if (e instanceof Error && /already exists/i.test(e.message)) {
+        return { status: "already_exists" as const };
+      }
+      throw e;
+    }
   },
 });
