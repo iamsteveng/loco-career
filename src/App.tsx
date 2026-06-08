@@ -15,7 +15,7 @@ export default function App() {
         <Route path="/jobs/:slug" element={<JobDetailPage />} />
 
         {/* Admin auth */}
-        <Route path="/admin/sign-in" element={<SignInPage />} />
+        <Route path="/admin/login" element={<SignInPage />} />
 
         {/* Admin portal (protected via AdminLayout) */}
         <Route path="/admin" element={<AdminLayout />}>

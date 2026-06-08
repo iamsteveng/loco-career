@@ -26,12 +26,12 @@ export function AdminLayout() {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/admin/sign-in" replace />;
+    return <Navigate to="/admin/login" replace />;
   }
 
   async function handleSignOut() {
     await signOut();
-    void navigate("/admin/sign-in");
+    void navigate("/admin/login");
   }
 
   return (

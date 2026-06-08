@@ -13,6 +13,7 @@ export function SignInPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [focusedField, setFocusedField] = useState<"email" | "password" | null>(null);
 
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
@@ -40,7 +41,7 @@ export function SignInPage() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "var(--colour\\/blue\\/800, #112c39)",
+        background: "linear-gradient(160deg, #112c39 0%, #0d2130 100%)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -51,13 +52,14 @@ export function SignInPage() {
       <div
         style={{
           width: "100%",
-          maxWidth: "400px",
-          backgroundColor: "var(--card)",
-          borderRadius: "var(--radius-card)",
+          maxWidth: "420px",
+          backgroundColor: "#ffffff",
+          borderRadius: "16px",
           padding: "2.5rem",
           display: "flex",
           flexDirection: "column",
           gap: "1.75rem",
+          boxShadow: "0 8px 40px rgba(0, 0, 0, 0.32), 0 2px 8px rgba(0, 0, 0, 0.16)",
         }}
       >
         {/* Logo */}
@@ -81,91 +83,151 @@ export function SignInPage() {
               fontFamily: "var(--font-family-roboto)",
               fontSize: "var(--text-h3)",
               fontWeight: "var(--font-weight-semibold)",
-              color: "var(--card-foreground)",
-              margin: "0 0 0.25rem",
+              color: "#111827",
+              margin: "0 0 0.375rem",
             }}
           >
             管理員登入
           </h1>
-          <p style={{ fontFamily: "var(--font-family-roboto)", fontSize: "var(--text-label)", color: "var(--muted-foreground)", margin: 0 }}>
+          <p
+            style={{
+              fontFamily: "var(--font-family-roboto)",
+              fontSize: "var(--text-label)",
+              color: "#6b7280",
+              margin: 0,
+            }}
+          >
             LocoBike Career 管理後台
           </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={(e) => { void handleSubmit(e); }} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-          <label style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-            <span style={{ fontFamily: "var(--font-family-roboto)", fontSize: "var(--text-label)", fontWeight: "var(--font-weight-medium)", color: "var(--card-foreground)" }}>
+        <form
+          onSubmit={(e) => { void handleSubmit(e); }}
+          style={{ display: "flex", flexDirection: "column", gap: "1.125rem" }}
+        >
+          <label style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+            <span
+              style={{
+                fontFamily: "var(--font-family-roboto)",
+                fontSize: "var(--text-label)",
+                fontWeight: "var(--font-weight-medium)",
+                color: "#374151",
+              }}
+            >
               電郵地址
             </span>
             <input
+              id="email"
+              name="email"
               type="email"
               required
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => setFocusedField("email")}
+              onBlur={() => setFocusedField(null)}
               placeholder="admin@example.com"
-              style={inputStyle}
+              aria-invalid={!!error}
+              style={getInputStyle(focusedField === "email")}
             />
           </label>
 
-          <label style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-            <span style={{ fontFamily: "var(--font-family-roboto)", fontSize: "var(--text-label)", fontWeight: "var(--font-weight-medium)", color: "var(--card-foreground)" }}>
+          <label style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+            <span
+              style={{
+                fontFamily: "var(--font-family-roboto)",
+                fontSize: "var(--text-label)",
+                fontWeight: "var(--font-weight-medium)",
+                color: "#374151",
+              }}
+            >
               密碼
             </span>
             <input
+              id="password"
+              name="password"
               type="password"
               required
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setFocusedField("password")}
+              onBlur={() => setFocusedField(null)}
               placeholder="••••••••"
-              style={inputStyle}
+              aria-invalid={!!error}
+              style={getInputStyle(focusedField === "password")}
             />
           </label>
 
           {error && (
-            <p style={{ fontFamily: "var(--font-family-roboto)", fontSize: "var(--text-label)", color: "var(--destructive)", margin: 0 }}>
-              {error}
-            </p>
+            <div
+              role="alert"
+              style={{
+                backgroundColor: "#fff1f2",
+                border: "1px solid #fecdd3",
+                borderRadius: "8px",
+                padding: "0.625rem 0.875rem",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-family-roboto)",
+                  fontSize: "var(--text-label)",
+                  color: "#be123c",
+                  margin: 0,
+                }}
+              >
+                {error}
+              </p>
+            </div>
           )}
 
           <button
             type="submit"
             disabled={submitting}
             style={{
-              backgroundColor: "var(--primary)",
-              color: "var(--primary-foreground)",
+              backgroundColor: submitting ? "#7dcbee" : "var(--primary)",
+              color: "#ffffff",
               fontFamily: "var(--font-family-roboto)",
               fontSize: "var(--text-base)",
               fontWeight: "var(--font-weight-semibold)",
-              padding: "0.875rem",
+              padding: "0.8125rem",
               borderRadius: "var(--radius-button)",
               border: "none",
               cursor: submitting ? "not-allowed" : "pointer",
-              opacity: submitting ? 0.7 : 1,
-              transition: "opacity 0.15s ease",
+              transition: "background-color 0.15s ease, transform 0.1s ease",
               marginTop: "0.25rem",
+              letterSpacing: "0.01em",
+            }}
+            onMouseEnter={(e) => {
+              if (!submitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#2d9fd4";
+            }}
+            onMouseLeave={(e) => {
+              if (!submitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "var(--primary)";
             }}
           >
             {submitting ? "處理中…" : "登入"}
           </button>
         </form>
-
       </div>
     </div>
   );
 }
 
-const inputStyle: React.CSSProperties = {
-  fontFamily: "var(--font-family-roboto)",
-  fontSize: "var(--text-base)",
-  color: "var(--card-foreground)",
-  backgroundColor: "var(--input-background)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-button)",
-  padding: "0.625rem 0.875rem",
-  outline: "none",
-  width: "100%",
-  boxSizing: "border-box",
-};
+function getInputStyle(focused: boolean): React.CSSProperties {
+  return {
+    fontFamily: "var(--font-family-roboto)",
+    fontSize: "var(--text-base)",
+    color: "#111827",
+    backgroundColor: "#ffffff",
+    border: focused ? "1.5px solid #44b0e2" : "1.5px solid #d1d5db",
+    borderRadius: "8px",
+    padding: "0.6875rem 0.875rem",
+    outline: "none",
+    width: "100%",
+    boxSizing: "border-box",
+    boxShadow: focused ? "0 0 0 3px rgba(68, 176, 226, 0.18)" : "none",
+    transition: "border-color 0.15s ease, box-shadow 0.15s ease",
+  };
+}
