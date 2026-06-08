@@ -14,3 +14,4 @@ convex/_generated
 *.swo
 .DS_Store
 Thumbs.db
+.vercel

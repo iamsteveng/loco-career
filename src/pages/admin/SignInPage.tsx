@@ -9,7 +9,6 @@ export function SignInPage() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { signIn } = useAuthActions();
 
-  const [mode, setMode] = useState<"signIn" | "signUp">("signIn");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -26,10 +25,10 @@ export function SignInPage() {
     setError("");
     setSubmitting(true);
     try {
-      await signIn("password", { email, password, flow: mode });
+      await signIn("password", { email, password, flow: "signIn" });
       void navigate("/admin");
     } catch {
-      setError(mode === "signIn" ? "電郵或密碼不正確，請重試。" : "無法建立帳戶，請重試。");
+      setError("電郵或密碼不正確，請重試。");
     } finally {
       setSubmitting(false);
     }
@@ -86,7 +85,7 @@ export function SignInPage() {
               margin: "0 0 0.25rem",
             }}
           >
-            {mode === "signIn" ? "管理員登入" : "建立管理員帳戶"}
+            管理員登入
           </h1>
           <p style={{ fontFamily: "var(--font-family-roboto)", fontSize: "var(--text-label)", color: "var(--muted-foreground)", margin: 0 }}>
             LocoBike Career 管理後台
@@ -117,7 +116,7 @@ export function SignInPage() {
             <input
               type="password"
               required
-              autoComplete={mode === "signIn" ? "current-password" : "new-password"}
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
@@ -149,31 +148,10 @@ export function SignInPage() {
               marginTop: "0.25rem",
             }}
           >
-            {submitting ? "處理中…" : mode === "signIn" ? "登入" : "建立帳戶"}
+            {submitting ? "處理中…" : "登入"}
           </button>
         </form>
 
-        {/* Toggle */}
-        <p style={{ textAlign: "center", fontFamily: "var(--font-family-roboto)", fontSize: "var(--text-label)", color: "var(--muted-foreground)", margin: 0 }}>
-          {mode === "signIn" ? "首次設定？" : "已有帳戶？"}
-          {" "}
-          <button
-            onClick={() => { setError(""); setMode(mode === "signIn" ? "signUp" : "signIn"); }}
-            style={{
-              background: "none",
-              border: "none",
-              padding: 0,
-              cursor: "pointer",
-              fontFamily: "var(--font-family-roboto)",
-              fontSize: "var(--text-label)",
-              color: "var(--primary)",
-              fontWeight: "var(--font-weight-medium)",
-              textDecoration: "underline",
-            }}
-          >
-            {mode === "signIn" ? "建立帳戶" : "登入"}
-          </button>
-        </p>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
 {
-  "buildCommand": "npx convex deploy --cmd 'vite build'",
+  "buildCommand": "npx convex deploy --env-file /dev/null --cmd 'vite build' --cmd-url-env-var-name VITE_CONVEX_URL",
   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
