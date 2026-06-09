@@ -233,6 +233,7 @@ export function AdminJobFormPage() {
             >
               <option value="全職">全職</option>
               <option value="兼職">兼職</option>
+              <option value="全職或兼職">全職或兼職</option>
               <option value="合約">合約</option>
               <option value="實習">實習</option>
             </select>
