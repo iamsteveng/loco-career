@@ -92,10 +92,10 @@ export function AdminJobFormPage() {
           responsibilities,
           requirements,
           published,
-          applyUrl: applyUrl || undefined,
+          applyUrl,
         });
       } else {
-        await create({ title, slug, department, location, type, deadline, overview, responsibilities, requirements, published, applyUrl: applyUrl || undefined });
+        await create({ title, slug, department, location, type, deadline, overview, responsibilities, requirements, published, applyUrl });
       }
       void navigate("/admin");
     } catch (err) {
@@ -286,9 +286,10 @@ export function AdminJobFormPage() {
         </Field>
 
         {/* Apply URL */}
-        <Field label="申請連結 (Google Form URL)" hint="選填">
+        <Field label="申請連結 (Google Form URL) *">
           <input
             type="url"
+            required
             value={applyUrl}
             onChange={(e) => setApplyUrl(e.target.value)}
             placeholder="https://forms.gle/..."

@@ -26,7 +26,7 @@ const jobFields = {
   responsibilities: v.array(v.string()),
   requirements: v.array(v.string()),
   published: v.boolean(),
-  applyUrl: v.optional(v.string()),
+  applyUrl: v.string(),
 };
 
 export const listAll = query({
