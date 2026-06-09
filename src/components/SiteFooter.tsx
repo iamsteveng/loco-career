@@ -12,10 +12,10 @@ const SOCIAL_LINKS = [
 ];
 
 const CONTACT_ITEMS = [
-  { label: "Technical Support", email: "hello@loco.hk" },
-  { label: "Recruitment", email: "hr@loco.hk" },
-  { label: "Media Inquiries", email: "media@loco.hk" },
-  { label: "Business Cooperation", email: "marketing@loco.hk" },
+  { label: "技術支援", email: "hello@loco.hk" },
+  { label: "招聘", email: "hr@loco.hk" },
+  { label: "媒體查詢", email: "media@loco.hk" },
+  { label: "商業合作", email: "marketing@loco.hk" },
 ];
 
 export function SiteFooter() {
