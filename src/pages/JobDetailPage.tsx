@@ -283,7 +283,8 @@ export function JobDetailPage() {
                 <DetailRow label="截止申請日期" value={job.deadline} />
               </div>
               <a
-                href={`mailto:careers@locolla.com?subject=Application: ${job.title}`}
+                href={job.applyUrl ?? `mailto:careers@locolla.com?subject=Application: ${encodeURIComponent(job.title)}`}
+                {...(job.applyUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 style={{
                   width: "100%",
                   backgroundColor: "var(--primary)",

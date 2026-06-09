@@ -29,6 +29,7 @@ export function AdminJobFormPage() {
   const [overview, setOverview] = useState("");
   const [responsibilitiesText, setResponsibilitiesText] = useState("");
   const [requirementsText, setRequirementsText] = useState("");
+  const [applyUrl, setApplyUrl] = useState("");
   const [published, setPublished] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -47,6 +48,7 @@ export function AdminJobFormPage() {
       setResponsibilitiesText(job.responsibilities.join("\n"));
       setRequirementsText(job.requirements.join("\n"));
       setPublished(job.published);
+      setApplyUrl(job.applyUrl ?? "");
     }
   }, [job]);
 
@@ -90,9 +92,10 @@ export function AdminJobFormPage() {
           responsibilities,
           requirements,
           published,
+          applyUrl: applyUrl || undefined,
         });
       } else {
-        await create({ title, slug, department, location, type, deadline, overview, responsibilities, requirements, published });
+        await create({ title, slug, department, location, type, deadline, overview, responsibilities, requirements, published, applyUrl: applyUrl || undefined });
       }
       void navigate("/admin");
     } catch (err) {
@@ -282,6 +285,17 @@ export function AdminJobFormPage() {
           />
         </Field>
 
+        {/* Apply URL */}
+        <Field label="申請連結 (Google Form URL)" hint="選填">
+          <input
+            type="url"
+            value={applyUrl}
+            onChange={(e) => setApplyUrl(e.target.value)}
+            placeholder="https://forms.gle/..."
+            style={inputStyle}
+          />
+        </Field>
+
         {/* Published toggle */}
         <label
           style={{
@@ -386,7 +400,7 @@ const inputStyle: React.CSSProperties = {
   color: "var(--card-foreground)",
   backgroundColor: "var(--input-background)",
   border: "1px solid var(--border)",
-  borderRadius: "var(--radius-button)",
+  borderRadius: 0,
   padding: "0.625rem 0.875rem",
   outline: "none",
   width: "100%",

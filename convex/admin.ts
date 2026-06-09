@@ -2,6 +2,19 @@ import { internalAction, mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { createAccount, getAuthUserId } from "@convex-dev/auth/server";
 
+function validateApplyUrl(url: string | undefined): string | undefined {
+  if (!url) return undefined;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+      throw new Error("applyUrl must start with http:// or https://");
+    }
+    return parsed.toString();
+  } catch (e) {
+    throw new Error(e instanceof Error ? e.message : "Invalid applyUrl");
+  }
+}
+
 const jobFields = {
   slug: v.string(),
   title: v.string(),
@@ -13,6 +26,7 @@ const jobFields = {
   responsibilities: v.array(v.string()),
   requirements: v.array(v.string()),
   published: v.boolean(),
+  applyUrl: v.optional(v.string()),
 };
 
 export const listAll = query({
@@ -38,7 +52,7 @@ export const create = mutation({
   handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
     if (!userId) throw new Error("Unauthorized");
-    return ctx.db.insert("jobs", args);
+    return ctx.db.insert("jobs", { ...args, applyUrl: validateApplyUrl(args.applyUrl) });
   },
 });
 
@@ -55,11 +69,12 @@ export const update = mutation({
     responsibilities: v.optional(v.array(v.string())),
     requirements: v.optional(v.array(v.string())),
     published: v.optional(v.boolean()),
+    applyUrl: v.optional(v.string()),
   },
   handler: async (ctx, { id, ...fields }) => {
     const userId = await getAuthUserId(ctx);
     if (!userId) throw new Error("Unauthorized");
-    await ctx.db.patch(id, fields);
+    await ctx.db.patch(id, { ...fields, applyUrl: validateApplyUrl(fields.applyUrl) });
   },
 });
 

@@ -15,5 +15,6 @@ export default defineSchema({
     responsibilities: v.array(v.string()),
     requirements: v.array(v.string()),
     published: v.boolean(),
+    applyUrl: v.optional(v.string()),
   }).index("by_slug", ["slug"]),
 });
