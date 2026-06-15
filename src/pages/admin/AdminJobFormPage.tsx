@@ -89,9 +89,9 @@ export function AdminJobFormPage() {
           department,
           location,
           type,
-          overview: overview || undefined,
-          salary: salary || undefined,
-          benefits: benefits || undefined,
+          overview: overview,
+          salary: salary,
+          benefits: benefits,
           responsibilities,
           requirements,
           published,
@@ -99,6 +99,7 @@ export function AdminJobFormPage() {
         });
       } else {
         await create({ title, slug, department, location, type, overview: overview || undefined, salary: salary || undefined, benefits: benefits || undefined, responsibilities, requirements, published, applyUrl });
+
       }
       void navigate("/admin");
     } catch (err) {
