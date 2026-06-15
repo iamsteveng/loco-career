@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router";
-import { ArrowLeft, MapPin, Clock, Calendar, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, MapPin, Clock, CheckCircle2 } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { SiteHeader } from "../components/SiteHeader";
@@ -158,7 +158,6 @@ export function JobDetailPage() {
             <div style={{ display: "flex", flexWrap: "wrap", gap: isMobile ? "0.5rem" : "1rem" }}>
               <MetaChip icon={<MapPin size={13} />} label={job.location} />
               <MetaChip icon={<Clock size={13} />} label={job.type} />
-              <MetaChip icon={<Calendar size={13} />} label={`截止日期：${job.deadline}`} />
             </div>
           </div>
         </div>
@@ -176,19 +175,21 @@ export function JobDetailPage() {
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", order: 1 }}>
-            <Section title="職位概覽">
-              <p
-                style={{
-                  fontFamily: "var(--font-family-roboto)",
-                  fontSize: "var(--text-base)",
-                  color: "var(--foreground)",
-                  lineHeight: "1.8",
-                  margin: 0,
-                }}
-              >
-                {job.overview}
-              </p>
-            </Section>
+            {job.overview && (
+              <Section title="職位概覽">
+                <p
+                  style={{
+                    fontFamily: "var(--font-family-roboto)",
+                    fontSize: "var(--text-base)",
+                    color: "var(--foreground)",
+                    lineHeight: "1.8",
+                    margin: 0,
+                  }}
+                >
+                  {job.overview}
+                </p>
+              </Section>
+            )}
 
             <Section title="職責">
               <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
@@ -280,7 +281,8 @@ export function JobDetailPage() {
                 <DetailRow label="部門" value={job.department} />
                 <DetailRow label="地點" value={job.location} />
                 <DetailRow label="工作類型" value={job.type} />
-                <DetailRow label="截止申請日期" value={job.deadline} />
+                {job.salary && <DetailRow label="人工" value={job.salary} />}
+                {job.benefits && <DetailRow label="待遇" value={job.benefits} />}
               </div>
               <a
                 href={job.applyUrl ?? `mailto:careers@locolla.com?subject=Application: ${encodeURIComponent(job.title)}`}

@@ -25,8 +25,9 @@ export function AdminJobFormPage() {
   const [department, setDepartment] = useState("");
   const [location, setLocation] = useState("");
   const [type, setType] = useState("全職");
-  const [deadline, setDeadline] = useState("");
   const [overview, setOverview] = useState("");
+  const [salary, setSalary] = useState("");
+  const [benefits, setBenefits] = useState("");
   const [responsibilitiesText, setResponsibilitiesText] = useState("");
   const [requirementsText, setRequirementsText] = useState("");
   const [applyUrl, setApplyUrl] = useState("");
@@ -43,8 +44,9 @@ export function AdminJobFormPage() {
       setDepartment(job.department);
       setLocation(job.location);
       setType(job.type);
-      setDeadline(job.deadline);
-      setOverview(job.overview);
+      setOverview(job.overview ?? "");
+      setSalary(job.salary ?? "");
+      setBenefits(job.benefits ?? "");
       setResponsibilitiesText(job.responsibilities.join("\n"));
       setRequirementsText(job.requirements.join("\n"));
       setPublished(job.published);
@@ -87,15 +89,16 @@ export function AdminJobFormPage() {
           department,
           location,
           type,
-          deadline,
-          overview,
+          overview: overview || undefined,
+          salary: salary || undefined,
+          benefits: benefits || undefined,
           responsibilities,
           requirements,
           published,
           applyUrl,
         });
       } else {
-        await create({ title, slug, department, location, type, deadline, overview, responsibilities, requirements, published, applyUrl });
+        await create({ title, slug, department, location, type, overview: overview || undefined, salary: salary || undefined, benefits: benefits || undefined, responsibilities, requirements, published, applyUrl });
       }
       void navigate("/admin");
     } catch (err) {
@@ -222,7 +225,7 @@ export function AdminJobFormPage() {
           </Field>
         </div>
 
-        {/* Type + Deadline */}
+        {/* Type + 人工 */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
           <Field label="工作類型 *">
             <select
@@ -238,22 +241,31 @@ export function AdminJobFormPage() {
               <option value="實習">實習</option>
             </select>
           </Field>
-          <Field label="截止日期 *" hint="格式：DD/MM/YYYY">
+          <Field label="人工">
             <input
               type="text"
-              required
-              value={deadline}
-              onChange={(e) => setDeadline(e.target.value)}
-              placeholder="e.g. 31/07/2026"
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
+              placeholder="e.g. HK$20,000 – 30,000／月"
               style={inputStyle}
             />
           </Field>
         </div>
 
+        {/* 待遇 */}
+        <Field label="待遇">
+          <input
+            type="text"
+            value={benefits}
+            onChange={(e) => setBenefits(e.target.value)}
+            placeholder="e.g. 醫療保險、彈性工時、年假15天"
+            style={inputStyle}
+          />
+        </Field>
+
         {/* Overview */}
-        <Field label="職位概覽 *">
+        <Field label="職位概覽">
           <textarea
-            required
             value={overview}
             onChange={(e) => setOverview(e.target.value)}
             rows={5}
