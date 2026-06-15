@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router";
-import { ArrowLeft, MapPin, Clock, Calendar, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, MapPin, Clock, CheckCircle2 } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { SiteHeader } from "../components/SiteHeader";
@@ -158,7 +158,6 @@ export function JobDetailPage() {
             <div style={{ display: "flex", flexWrap: "wrap", gap: isMobile ? "0.5rem" : "1rem" }}>
               <MetaChip icon={<MapPin size={13} />} label={job.location} />
               <MetaChip icon={<Clock size={13} />} label={job.type} />
-              <MetaChip icon={<Calendar size={13} />} label={`截止日期：${job.deadline}`} />
             </div>
           </div>
         </div>
@@ -176,19 +175,21 @@ export function JobDetailPage() {
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", order: 1 }}>
-            <Section title="職位概覽">
-              <p
-                style={{
-                  fontFamily: "var(--font-family-roboto)",
-                  fontSize: "var(--text-base)",
-                  color: "var(--foreground)",
-                  lineHeight: "1.8",
-                  margin: 0,
-                }}
-              >
-                {job.overview}
-              </p>
-            </Section>
+            {job.overview && (
+              <Section title="職位概覽">
+                <p
+                  style={{
+                    fontFamily: "var(--font-family-roboto)",
+                    fontSize: "var(--text-base)",
+                    color: "var(--foreground)",
+                    lineHeight: "1.8",
+                    margin: 0,
+                  }}
+                >
+                  {job.overview}
+                </p>
+              </Section>
+            )}
 
             <Section title="職責">
               <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
@@ -280,10 +281,12 @@ export function JobDetailPage() {
                 <DetailRow label="部門" value={job.department} />
                 <DetailRow label="地點" value={job.location} />
                 <DetailRow label="工作類型" value={job.type} />
-                <DetailRow label="截止申請日期" value={job.deadline} />
+                {job.salary && <DetailRow label="人工" value={job.salary} />}
+                {job.benefits && <DetailRow label="待遇" value={job.benefits} />}
               </div>
               <a
-                href={`mailto:careers@locolla.com?subject=Application: ${job.title}`}
+                href={job.applyUrl ?? `mailto:careers@locolla.com?subject=Application: ${encodeURIComponent(job.title)}`}
+                {...(job.applyUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 style={{
                   width: "100%",
                   backgroundColor: "var(--primary)",
@@ -312,64 +315,6 @@ export function JobDetailPage() {
           </aside>
         </div>
 
-        {/* Bottom CTA */}
-        <div
-          style={{
-            backgroundColor: "var(--accent)",
-            borderTop: "1px solid var(--border)",
-            padding: `${isMobile ? "3rem" : "4rem"} ${hPad}`,
-            textAlign: "center",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "var(--font-family-comfortaa)",
-              fontSize: "var(--text-h2)",
-              fontWeight: "var(--font-weight-regular)",
-              color: "var(--foreground)",
-              marginBottom: "1rem",
-            }}
-          >
-            準備好與我們一同出發？
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-family-roboto)",
-              fontSize: "var(--text-base)",
-              color: "var(--accent-foreground)",
-              maxWidth: "480px",
-              margin: "0 auto 2rem",
-              lineHeight: "1.7",
-            }}
-          >
-            踏出職業生涯的下一步，與我們共同建構城市出行的未來。
-          </p>
-          <a
-            href="https://www.locolla.com/contact/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-block",
-              backgroundColor: "var(--primary)",
-              color: "var(--primary-foreground)",
-              fontFamily: "var(--font-family-roboto)",
-              fontSize: "var(--text-base)",
-              fontWeight: "var(--font-weight-semibold)",
-              padding: "0.875rem 2.5rem",
-              borderRadius: "var(--radius-button)",
-              border: "none",
-              cursor: "pointer",
-              transition: "opacity 0.15s ease",
-              lineHeight: "1.5",
-              letterSpacing: "0.15px",
-              textDecoration: "none",
-            }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.88")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")}
-          >
-            加入我們
-          </a>
-        </div>
       </main>
 
       <SiteFooter />

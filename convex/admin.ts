@@ -2,17 +2,32 @@ import { internalAction, mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { createAccount, getAuthUserId } from "@convex-dev/auth/server";
 
+function validateApplyUrl(url: string | undefined): string | undefined {
+  if (!url) return undefined;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+      throw new Error("applyUrl must start with http:// or https://");
+    }
+    return parsed.toString();
+  } catch (e) {
+    throw new Error(e instanceof Error ? e.message : "Invalid applyUrl");
+  }
+}
+
 const jobFields = {
   slug: v.string(),
   title: v.string(),
   department: v.string(),
   location: v.string(),
   type: v.string(),
-  deadline: v.string(),
-  overview: v.string(),
+  overview: v.optional(v.string()),
+  salary: v.optional(v.string()),
+  benefits: v.optional(v.string()),
   responsibilities: v.array(v.string()),
   requirements: v.array(v.string()),
   published: v.boolean(),
+  applyUrl: v.string(),
 };
 
 export const listAll = query({
@@ -38,7 +53,7 @@ export const create = mutation({
   handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
     if (!userId) throw new Error("Unauthorized");
-    return ctx.db.insert("jobs", args);
+    return ctx.db.insert("jobs", { ...args, applyUrl: validateApplyUrl(args.applyUrl) });
   },
 });
 
@@ -50,16 +65,18 @@ export const update = mutation({
     department: v.optional(v.string()),
     location: v.optional(v.string()),
     type: v.optional(v.string()),
-    deadline: v.optional(v.string()),
     overview: v.optional(v.string()),
+    salary: v.optional(v.string()),
+    benefits: v.optional(v.string()),
     responsibilities: v.optional(v.array(v.string())),
     requirements: v.optional(v.array(v.string())),
     published: v.optional(v.boolean()),
+    applyUrl: v.optional(v.string()),
   },
   handler: async (ctx, { id, ...fields }) => {
     const userId = await getAuthUserId(ctx);
     if (!userId) throw new Error("Unauthorized");
-    await ctx.db.patch(id, fields);
+    await ctx.db.patch(id, { ...fields, applyUrl: validateApplyUrl(fields.applyUrl) });
   },
 });
 
@@ -96,7 +113,6 @@ export const seed = mutation({
         department: "Engineering",
         location: "香港",
         type: "全職",
-        deadline: "31/07/2026",
         published: true,
         overview:
           "LocoBike is seeking an R&D Engineer with strong full-stack capabilities and a solid understanding of mobile application systems (iOS & Android) to support our smart-mobility platform and applied research initiatives. This role is for engineers who use AI coding agents as a force multiplier, not a substitute for thinking — you will design systems, make architectural decisions, and take full ownership of code quality while leveraging AI tools to deliver high-quality, maintainable, and well-reasoned solutions.",
@@ -128,7 +144,6 @@ export const seed = mutation({
         department: "Engineering",
         location: "遠端 — 東南亞",
         type: "全職",
-        deadline: "15/07/2026",
         published: true,
         overview:
           "Join our engineering team as a Frontend Engineer and help build fast, accessible, and beautifully crafted web experiences. You'll work in a modern React stack, collaborating with designers and backend engineers to ship features that make a real difference for our users.",
@@ -155,7 +170,6 @@ export const seed = mutation({
         department: "Product",
         location: "胡志明市，越南",
         type: "全職",
-        deadline: "01/08/2026",
         published: true,
         overview:
           "We're looking for an experienced Product Manager to drive the strategy and execution of one of our core product lines. You'll work at the intersection of user needs, business goals, and technical constraints — defining what we build and why, and rallying the team to ship meaningful impact.",
@@ -182,7 +196,6 @@ export const seed = mutation({
         department: "Data",
         location: "遠端 — 亞太區",
         type: "全職",
-        deadline: "31/07/2026",
         published: true,
         overview:
           "As a Data Analyst, you'll turn raw data into clear, actionable insights that guide product decisions and business strategy. You'll work with product managers, marketers, and engineers to understand user behavior, track key metrics, and help us build more effectively.",

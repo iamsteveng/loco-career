@@ -25,10 +25,12 @@ export function AdminJobFormPage() {
   const [department, setDepartment] = useState("");
   const [location, setLocation] = useState("");
   const [type, setType] = useState("全職");
-  const [deadline, setDeadline] = useState("");
   const [overview, setOverview] = useState("");
+  const [salary, setSalary] = useState("");
+  const [benefits, setBenefits] = useState("");
   const [responsibilitiesText, setResponsibilitiesText] = useState("");
   const [requirementsText, setRequirementsText] = useState("");
+  const [applyUrl, setApplyUrl] = useState("");
   const [published, setPublished] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -42,11 +44,13 @@ export function AdminJobFormPage() {
       setDepartment(job.department);
       setLocation(job.location);
       setType(job.type);
-      setDeadline(job.deadline);
-      setOverview(job.overview);
+      setOverview(job.overview ?? "");
+      setSalary(job.salary ?? "");
+      setBenefits(job.benefits ?? "");
       setResponsibilitiesText(job.responsibilities.join("\n"));
       setRequirementsText(job.requirements.join("\n"));
       setPublished(job.published);
+      setApplyUrl(job.applyUrl ?? "");
     }
   }, [job]);
 
@@ -85,14 +89,17 @@ export function AdminJobFormPage() {
           department,
           location,
           type,
-          deadline,
-          overview,
+          overview: overview,
+          salary: salary,
+          benefits: benefits,
           responsibilities,
           requirements,
           published,
+          applyUrl,
         });
       } else {
-        await create({ title, slug, department, location, type, deadline, overview, responsibilities, requirements, published });
+        await create({ title, slug, department, location, type, overview: overview || undefined, salary: salary || undefined, benefits: benefits || undefined, responsibilities, requirements, published, applyUrl });
+
       }
       void navigate("/admin");
     } catch (err) {
@@ -219,7 +226,7 @@ export function AdminJobFormPage() {
           </Field>
         </div>
 
-        {/* Type + Deadline */}
+        {/* Type + 人工 */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
           <Field label="工作類型 *">
             <select
@@ -230,26 +237,36 @@ export function AdminJobFormPage() {
             >
               <option value="全職">全職</option>
               <option value="兼職">兼職</option>
+              <option value="全職或兼職">全職或兼職</option>
               <option value="合約">合約</option>
               <option value="實習">實習</option>
             </select>
           </Field>
-          <Field label="截止日期 *" hint="格式：DD/MM/YYYY">
+          <Field label="人工">
             <input
               type="text"
-              required
-              value={deadline}
-              onChange={(e) => setDeadline(e.target.value)}
-              placeholder="e.g. 31/07/2026"
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
+              placeholder="e.g. HK$20,000 – 30,000／月"
               style={inputStyle}
             />
           </Field>
         </div>
 
+        {/* 待遇 */}
+        <Field label="待遇">
+          <input
+            type="text"
+            value={benefits}
+            onChange={(e) => setBenefits(e.target.value)}
+            placeholder="e.g. 醫療保險、彈性工時、年假15天"
+            style={inputStyle}
+          />
+        </Field>
+
         {/* Overview */}
-        <Field label="職位概覽 *">
+        <Field label="職位概覽">
           <textarea
-            required
             value={overview}
             onChange={(e) => setOverview(e.target.value)}
             rows={5}
@@ -279,6 +296,18 @@ export function AdminJobFormPage() {
             rows={6}
             placeholder={"Bachelor's degree in Computer Science…\n3+ years of experience…"}
             style={{ ...inputStyle, resize: "vertical", minHeight: "140px" }}
+          />
+        </Field>
+
+        {/* Apply URL */}
+        <Field label="申請連結 (Google Form URL) *">
+          <input
+            type="url"
+            required
+            value={applyUrl}
+            onChange={(e) => setApplyUrl(e.target.value)}
+            placeholder="https://forms.gle/..."
+            style={inputStyle}
           />
         </Field>
 
@@ -386,7 +415,7 @@ const inputStyle: React.CSSProperties = {
   color: "var(--card-foreground)",
   backgroundColor: "var(--input-background)",
   border: "1px solid var(--border)",
-  borderRadius: "var(--radius-button)",
+  borderRadius: 0,
   padding: "0.625rem 0.875rem",
   outline: "none",
   width: "100%",

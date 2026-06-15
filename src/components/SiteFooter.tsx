@@ -1,4 +1,4 @@
-import { ArrowUp, Mail } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import svgPaths from "../assets/Landing/svg-kpsqtc8fir";
 import { useBreakpoints } from "../hooks/useBreakpoints";
 import IcFacebook from "../assets/IcFacebook/IcFacebook";
@@ -11,9 +11,11 @@ const SOCIAL_LINKS = [
   { Component: IcYoutube, label: "YouTube", href: "https://www.youtube.com/channel/UCpd1BDpjvPZB1q7wlgp_PDg/featured" },
 ];
 
-const SERVICE_LINKS = [
-  { label: "LocoBike", href: "https://loco.hk/zh-HK/bike" },
-  { label: "LocoMart", href: "https://mart.loco.hk/" },
+const CONTACT_ITEMS = [
+  { label: "技術支援", email: "hello@loco.hk" },
+  { label: "招聘", email: "hr@loco.hk" },
+  { label: "媒體查詢", email: "media@loco.hk" },
+  { label: "商業合作", email: "marketing@loco.hk" },
 ];
 
 export function SiteFooter() {
@@ -99,21 +101,31 @@ export function SiteFooter() {
                   lineHeight: "28px",
                 }}
               >
-                服務範圍
+                聯絡我們
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                {SERVICE_LINKS.map(({ label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={linkStyle}
-                    onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.7")}
-                    onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")}
-                  >
-                    {label}
-                  </a>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                {CONTACT_ITEMS.map(({ label, email }) => (
+                  <div key={label} style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-family-roboto)",
+                        fontSize: "var(--text-label)",
+                        fontWeight: "var(--font-weight-medium)",
+                        color: "rgba(255,255,255,0.6)",
+                        lineHeight: "20px",
+                      }}
+                    >
+                      {label}
+                    </span>
+                    <a
+                      href={`mailto:${email}`}
+                      style={linkStyle}
+                      onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.7")}
+                      onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")}
+                    >
+                      {email}
+                    </a>
+                  </div>
                 ))}
               </div>
             </div>
@@ -168,18 +180,8 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Right: scroll-to-top + Contact Us */}
-        <div
-          style={{
-            flexShrink: 0,
-            display: "flex",
-            flexDirection: isDesktop ? "column" : "row",
-            alignItems: isDesktop ? "flex-end" : "center",
-            justifyContent: isDesktop ? undefined : "space-between",
-            gap: "24px",
-            width: isDesktop ? undefined : "100%",
-          }}
-        >
+        {/* Right: scroll-to-top */}
+        <div style={{ flexShrink: 0, alignSelf: isDesktop ? "flex-start" : undefined }}>
           <button
             onClick={scrollToTop}
             aria-label="Scroll to top"
@@ -196,43 +198,12 @@ export function SiteFooter() {
               color: "var(--primary)",
               flexShrink: 0,
               transition: "background-color 0.15s ease",
-              order: isDesktop ? 0 : 1,
             }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(68,176,226,0.1)")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent")}
           >
             <ArrowUp size={24} />
           </button>
-
-          <a
-            href="https://www.locolla.com/contact/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              height: "48px",
-              padding: "8px 16px",
-              borderRadius: "360px",
-              border: "2px solid var(--primary)",
-              backgroundColor: "var(--primary)",
-              fontFamily: "var(--font-family-roboto)",
-              fontSize: "var(--text-label)",
-              fontWeight: "var(--font-weight-medium)",
-              color: "var(--primary-foreground)",
-              letterSpacing: "0.1px",
-              whiteSpace: "nowrap",
-              textDecoration: "none",
-              transition: "opacity 0.15s ease",
-              flexShrink: 0,
-            }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.88")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")}
-          >
-            <Mail size={16} />
-            聯絡我們
-          </a>
         </div>
       </div>
 
