@@ -315,64 +315,6 @@ export function JobDetailPage() {
           </aside>
         </div>
 
-        {/* Bottom CTA */}
-        <div
-          style={{
-            backgroundColor: "var(--accent)",
-            borderTop: "1px solid var(--border)",
-            padding: `${isMobile ? "3rem" : "4rem"} ${hPad}`,
-            textAlign: "center",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "var(--font-family-comfortaa)",
-              fontSize: "var(--text-h2)",
-              fontWeight: "var(--font-weight-regular)",
-              color: "var(--foreground)",
-              marginBottom: "1rem",
-            }}
-          >
-            準備好與我們一同出發？
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-family-roboto)",
-              fontSize: "var(--text-base)",
-              color: "var(--accent-foreground)",
-              maxWidth: "480px",
-              margin: "0 auto 2rem",
-              lineHeight: "1.7",
-            }}
-          >
-            踏出職業生涯的下一步，與我們共同建構城市出行的未來。
-          </p>
-          <a
-            href="https://www.locolla.com/contact/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-block",
-              backgroundColor: "var(--primary)",
-              color: "var(--primary-foreground)",
-              fontFamily: "var(--font-family-roboto)",
-              fontSize: "var(--text-base)",
-              fontWeight: "var(--font-weight-semibold)",
-              padding: "0.875rem 2.5rem",
-              borderRadius: "var(--radius-button)",
-              border: "none",
-              cursor: "pointer",
-              transition: "opacity 0.15s ease",
-              lineHeight: "1.5",
-              letterSpacing: "0.15px",
-              textDecoration: "none",
-            }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.88")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")}
-          >
-            加入我們
-          </a>
-        </div>
       </main>
 
       <SiteFooter />
