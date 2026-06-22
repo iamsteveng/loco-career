@@ -76,7 +76,7 @@ export function CareerPage() {
             </p>
             <h1
               style={{
-                fontFamily: "var(--font-family-comfortaa)",
+                fontFamily: "var(--font-family-roboto)",
                 fontSize: isMobile ? "var(--text-h2)" : "clamp(2rem, 5vw, 3rem)",
                 fontWeight: "var(--font-weight-regular)",
                 color: "var(--primary-foreground)",
@@ -147,7 +147,7 @@ export function CareerPage() {
             <div>
               <h2
                 style={{
-                  fontFamily: "var(--font-family-comfortaa)",
+                  fontFamily: "var(--font-family-roboto)",
                   fontSize: "var(--text-h2)",
                   fontWeight: "var(--font-weight-regular)",
                   color: "var(--foreground)",
@@ -189,7 +189,7 @@ export function CareerPage() {
             <div style={{ marginBottom: "2rem" }}>
               <h2
                 style={{
-                  fontFamily: "var(--font-family-comfortaa)",
+                  fontFamily: "var(--font-family-roboto)",
                   fontSize: "var(--text-h2)",
                   fontWeight: "var(--font-weight-regular)",
                   color: "var(--foreground)",
