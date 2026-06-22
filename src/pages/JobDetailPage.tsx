@@ -51,7 +51,7 @@ export function JobDetailPage() {
         >
           <h1
             style={{
-              fontFamily: "var(--font-family-comfortaa)",
+              fontFamily: "var(--font-family-roboto)",
               fontSize: "var(--text-h2)",
               fontWeight: "var(--font-weight-regular)",
               color: "var(--foreground)",
@@ -145,7 +145,7 @@ export function JobDetailPage() {
             </p>
             <h1
               style={{
-                fontFamily: "var(--font-family-comfortaa)",
+                fontFamily: "var(--font-family-roboto)",
                 fontSize: isMobile ? "var(--text-h2)" : "clamp(1.75rem, 4vw, 2.5rem)",
                 fontWeight: "var(--font-weight-regular)",
                 color: "var(--primary-foreground)",
@@ -327,7 +327,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
     <div>
       <h2
         style={{
-          fontFamily: "var(--font-family-comfortaa)",
+          fontFamily: "var(--font-family-roboto)",
           fontSize: "var(--text-h3)",
           fontWeight: "var(--font-weight-regular)",
           color: "var(--foreground)",
