@@ -25,7 +25,7 @@ After linking Convex, run the seed mutation once from the Convex dashboard (`adm
 
 **Stack:** React 18 + TypeScript + Vite 6 + Tailwind CSS v4 + React Router v7 + Convex (database + auth) + Vercel (hosting). Package manager: pnpm.
 
-**Public site** (`src/pages/CareerPage.tsx`, `JobDetailPage.tsx`) reads live job data via `useQuery(api.jobs.list)` and `useQuery(api.jobs.getBySlug, { slug })`. Jobs use slug-based URLs (`/jobs/rd-engineer`).
+**Public site** (`src/pages/CareerPage.tsx`, `JobDetailPage.tsx`) reads live job data via `useQuery(api.jobs.list)` and `useQuery(api.jobs.getBySlug, { slug })`. Jobs use slug-based URLs (`/jobs/rd-engineer`). A slash in a slug is percent-encoded in the link and decoded before lookup; the route is `/jobs/*` so an unencoded slash still matches.
 
 **Admin portal** (`src/pages/admin/`) is a protected section at `/admin`. `AdminLayout.tsx` is the auth guard — it checks `useConvexAuth()` and redirects to `/admin/sign-in` when unauthenticated. Sign-in supports both `signIn` and `signUp` flows (first-time setup via sign-up).
 

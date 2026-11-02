@@ -12,7 +12,8 @@ export default function App() {
       <Routes>
         {/* Public */}
         <Route path="/" element={<CareerPage />} />
-        <Route path="/jobs/:slug" element={<JobDetailPage />} />
+        {/* Splat: a slash inside the slug is part of the slug, encoded or not. */}
+        <Route path="/jobs/*" element={<JobDetailPage />} />
 
         {/* Admin auth */}
         <Route path="/admin/login" element={<SignInPage />} />
