@@ -5,12 +5,14 @@ import { api } from "../../convex/_generated/api";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { useBreakpoints } from "../hooks/useBreakpoints";
+import { decodeJobSlug } from "../lib/slug";
 
 export function JobDetailPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { "*": slugParam } = useParams();
+  const slug = decodeJobSlug(slugParam ?? "");
   const navigate = useNavigate();
   const { isMobile, isTablet, isDesktop } = useBreakpoints();
-  const job = useQuery(api.jobs.getBySlug, { slug: slug ?? "" });
+  const job = useQuery(api.jobs.getBySlug, { slug });
 
   const hPad = isMobile ? "20px" : isTablet ? "40px" : "80px";
 

@@ -5,6 +5,7 @@ import { api } from "../../convex/_generated/api";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { useBreakpoints } from "../hooks/useBreakpoints";
+import { jobPath } from "../lib/slug";
 import heroBanner from "../assets/IMG_1759_retouch.jpg";
 import whyImage1 from "../assets/Frame_2.jpg";
 import whyImage2 from "../assets/j6mlo8j6mlo8j6ml.png";
@@ -227,7 +228,7 @@ export function CareerPage() {
               {jobs.map((job) => (
                 <button
                   key={job._id}
-                  onClick={() => navigate(`/jobs/${job.slug}`)}
+                  onClick={() => navigate(jobPath(job.slug))}
                   style={{
                     width: "100%",
                     textAlign: "left",
