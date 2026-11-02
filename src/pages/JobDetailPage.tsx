@@ -1,3 +1,4 @@
+import { useLayoutEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, MapPin, Clock, CheckCircle2 } from "lucide-react";
 import { useQuery } from "convex/react";
@@ -13,6 +14,12 @@ export function JobDetailPage() {
   const navigate = useNavigate();
   const { isMobile, isTablet, isDesktop } = useBreakpoints();
   const job = useQuery(api.jobs.getBySlug, { slug });
+
+  useLayoutEffect(() => {
+    // The first paint is a short loading shell. When the posting arrives,
+    // scroll anchoring would keep the footer in view.
+    window.scrollTo(0, 0);
+  }, [slug, job?._id]);
 
   const hPad = isMobile ? "20px" : isTablet ? "40px" : "80px";
 
