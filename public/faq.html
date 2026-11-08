@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Locobike FAQ</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #44b0e2;
+      --blue-800: #112c39;
+      --grey-500: #515151;
+      --radius-card: 12px;
+      --radius-button: 360px;
+      --elevation-sm: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+      background: #f5f8fa;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--blue-800);
+      padding: 0 clamp(20px, 5vw, 80px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+    }
+    header a {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.25rem;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Hero banner ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-800) 0%, #1a4a5e 100%);
+      padding: clamp(2.5rem, 6vw, 4.5rem) clamp(20px, 5vw, 80px);
+      text-align: center;
+    }
+    .hero h1 {
+      color: #fff;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── Main layout ── */
+    .layout {
+      display: flex;
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: clamp(24px, 4vw, 48px) clamp(20px, 5vw, 48px);
+      flex: 1;
+      align-items: flex-start;
+    }
+
+    /* ── Category sidebar ── */
+    .sidebar {
+      flex: 0 0 220px;
+      position: sticky;
+      top: 24px;
+    }
+    .sidebar h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--grey-500);
+      margin-bottom: 12px;
+    }
+    .cat-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .cat-list button {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--grey-500);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .cat-list button:hover { background: rgba(68,176,226,0.1); color: var(--primary); }
+    .cat-list button.active { background: var(--primary); color: #fff; font-weight: 500; }
+
+    /* ── FAQ items ── */
+    .faq-list {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ── Search ── */
+    .search-wrap {
+      margin-bottom: 20px;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 10px 16px;
+      border: 1.5px solid #dde3e8;
+      border-radius: var(--radius-button);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s;
+      background: #fff;
+    }
+    .search-wrap input:focus { border-color: var(--primary); }
+
+    /* ── Accordion item ── */
+    details {
+      background: #fff;
+      border-radius: var(--radius-card);
+      box-shadow: var(--elevation-sm);
+      overflow: hidden;
+    }
+    details[open] { box-shadow: 0 4px 20px rgba(68,176,226,0.18); }
+
+    summary {
+      list-style: none;
+      padding: 18px 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--blue-800);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary .chevron {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(68,176,226,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+    summary .chevron svg { transition: transform 0.2s; }
+    details[open] summary .chevron { background: var(--primary); }
+    details[open] summary .chevron svg { transform: rotate(180deg); }
+    details[open] summary .chevron svg path { stroke: #fff; }
+
+    .answer {
+      padding: 0 20px 18px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--grey-500);
+      border-top: 1px solid #f0f4f7;
+    }
+    .answer a { color: var(--primary); }
+
+    /* ── Empty state ── */
+    .empty {
+      text-align: center;
+      color: var(--grey-500);
+      padding: 48px 0;
+      font-size: 0.95rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--blue-800);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 24px clamp(20px, 5vw, 80px);
+      font-size: 0.875rem;
+      margin-top: auto;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 680px) {
+      .layout { flex-direction: column; gap: 20px; }
+      .sidebar { position: static; flex: none; width: 100%; }
+      .cat-list { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+      .cat-list button { width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/">LocoBike</a>
+</header>
+
+<div class="hero">
+  <h1 id="page-title">FAQ</h1>
+  <p id="page-desc"></p>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" aria-label="FAQ categories">
+    <h2>Categories</h2>
+    <ul class="cat-list" id="cat-list"></ul>
+  </nav>
+
+  <div class="faq-list" id="faq-section">
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="Search questions…" aria-label="Search FAQ" />
+    </div>
+    <div id="faq-items"></div>
+  </div>
+</div>
+
+<footer id="faq-footer"></footer>
+
+<script>
+  // Parse the custom answer syntax (handles <br></br> and <link>…</link> with params)
+  function parseAnswer(raw, params) {
+    let html = raw
+      .replace(/<br><\/br>/g, "<br>")
+      .replace(/&/g, "&amp;");
+
+    if (params && params.link) {
+      const link = params.link;
+      const href = link.href || link.url || "#";
+      const target = link.target ? ` target="${link.target}"` : "";
+      html = html.replace(
+        /<link>([\s\S]*?)<\/link>/,
+        `<a href="${href}"${target}>$1</a>`
+      );
+    }
+    // Strip any remaining unknown tags
+    html = html.replace(/<link>|<\/link>/g, "");
+    return html;
+  }
+
+  let allItems = [];
+  let activeCategory = "all";
+
+  function render() {
+    const q = document.getElementById("search").value.trim().toLowerCase();
+    const container = document.getElementById("faq-items");
+    const filtered = allItems.filter(item => {
+      const matchCat = activeCategory === "all" || item.categoryKey === activeCategory;
+      const matchQ = !q || item.questionText.toLowerCase().includes(q) || item.answerText.toLowerCase().includes(q);
+      return matchCat && matchQ;
+    });
+
+    if (!filtered.length) {
+      container.innerHTML = '<div class="empty">No results found.</div>';
+      return;
+    }
+
+    container.innerHTML = filtered.map(item => `
+      <details>
+        <summary>
+          <span>${item.questionText}</span>
+          <span class="chevron">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 4l4 4 4-4" stroke="#44b0e2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <div class="answer">${item.answerHtml}</div>
+      </details>
+    `).join("");
+  }
+
+  function setCategory(key) {
+    activeCategory = key;
+    document.querySelectorAll(".cat-list button").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.key === key);
+    });
+    render();
+  }
+
+  async function init() {
+    const data = await fetch("/faq.json").then(r => r.json());
+    const faq = data.faq;
+
+    document.title = faq.meta.title || "Locobike FAQ";
+    document.getElementById("page-title").textContent = faq.title || "FAQ";
+    document.getElementById("page-desc").textContent = faq.meta.description || "";
+    document.getElementById("faq-footer").textContent = faq.footer || "";
+
+    // Build category nav (prepend "All")
+    const catList = document.getElementById("cat-list");
+    const allCategories = [{ key: "all", label: "All" }, ...Object.entries(faq.categories).map(([k, v]) => ({ key: k, label: v }))];
+    catList.innerHTML = allCategories.map(c =>
+      `<li><button data-key="${c.key}" class="${c.key === "all" ? "active" : ""}">${c.label}</button></li>`
+    ).join("");
+    catList.addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (btn) setCategory(btn.dataset.key);
+    });
+
+    // Flatten items (no category mapping in JSON, so all items go under "all")
+    allItems = Object.entries(faq.item).map(([key, item]) => ({
+      key,
+      categoryKey: "all",
+      questionText: item.question.replace(/^Q:\s*/, ""),
+      answerText: item.answer,
+      answerHtml: parseAnswer(item.answer.replace(/^A:\s*/, ""), item.params),
+    }));
+
+    document.getElementById("search").addEventListener("input", render);
+    render();
+  }
+
+  init().catch(err => {
+    document.getElementById("faq-items").innerHTML =
+      '<div class="empty">Failed to load FAQ. Please try again later.</div>';
+    console.error(err);
+  });
+</script>
+</body>
+</html>

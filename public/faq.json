@@ -1,0 +1,145 @@
+{
+  "faq": {
+    "meta": {
+      "description": "Locobike FAQs cover issues related to account login, payment and fees, and rental operations.",
+      "title": "Locobike FAQ"
+    },
+    "title": "Locobike FAQ",
+    "categories": {
+      "userGuide": "User Guide",
+      "serviceIntro": "Service Introduction",
+      "accountLogin": "Account & Login",
+      "paymentFees": "Payment & Fees",
+      "rentalOperation": "Rental & Operation",
+      "parkingEnd": "Parking & End Trip",
+      "harbourGo": "Harbour Go",
+      "safetCredit": "Safety & Credit System",
+      "feedbackSupport": "Feedback & Support"
+    },
+    "item": {
+      "dataSecurity": {
+        "question": "Q: Is my personal data and credit card information secure?",
+        "answer": "A: All data is encrypted and transmitted to servers. We do not store credit card information, and top-ups are securely processed by third-party gateways."
+      },
+      "creditScore": {
+        "question": "Q: What is credit score?",
+        "answer": "A: Users have a default credit score of 100 points, which reflects usage compliance. If the credit score drops to 0, the service will be unavailable. The company reserves the right to deduct balance or pursue compensation for insufficient amounts.<br></br><br></br>* For detailed information on credit score adjustments and penalties, please refer to the <link><b>\"Rules\"</b></link>.",
+        "params": {
+          "link": {
+            "href": "/bike/tnc#credit"
+          }
+        }
+      },
+      "whatIsLocobike": {
+        "question": "Q: What is Locobike?",
+        "answer": "A: Locobike is a Hong Kong bike-sharing brand that provides 24-hour bike rental services through an app. No cash needed - you can cycle anytime, anywhere, solving short-distance transportation needs for Hong Kong people and promoting local eco-friendly travel and recreational activities."
+      },
+      "loginFail": {
+        "question": "Q: What to do if I can't log in?",
+        "answer": "A: Please log in within 1 minute after phone verification. If timeout, please reverify. If your phone supports dual SIM, please turn off/remove the unused SIM card and try again."
+      },
+      "phoneInvalid": {
+        "question": "Q: How to log in if my phone number is invalid?",
+        "answer": "A: If the number is invalid, users cannot log in again and the account will become invalid. However, if the app is still logged in, users can continue to use the service."
+      },
+      "pricing": {
+        "question": "Q: What are the fees?",
+        "answer": "A: You can select different plans in 'My Wallet' → 'Top Up' / 'Purchase'. For details, please check the plan content or email hello@loco.hk for inquiries."
+      },
+      "topUp": {
+        "question": "Q: How to top up Locobike?",
+        "answer": "A: Add Visa, MasterCard, or Hong Kong-issued UnionPay credit cards in 'My Wallet → Credit Card Management', then go to 'My Wallet' → 'Top Up' / 'Purchase' to select services."
+      },
+      "noCreditCard": {
+        "question": "Q: What if I don't have a credit card?",
+        "answer": "A: Consider using other payment methods (Alipay HK, PayMe, Octopus, Faster Payment System (FPS), Alipay) or top up through Octopus virtual prepaid Mastercard."
+      },
+      "refund": {
+        "question": "Q: Can I get a refund from Locobike?",
+        "answer": "A: If due to permanent health issues and usage is less than 3 times, you can apply for a refund with a doctor's certificate."
+      },
+      "howToRent": {
+        "question": "Q: How to rent a Locobike?",
+        "answer": "A: Download and open the Locobike App → Open map to find bikes → Turn on Bluetooth → Scan QR code on bike body or lock to unlock."
+      },
+      "unlockFail": {
+        "question": "Q: What to do if unlocking fails?",
+        "answer": "A: Restart your phone, turn on Bluetooth, ensure no other devices are connected, then scan QR code with the app and retry."
+      },
+      "checkBike": {
+        "question": "Q: Can I check the bike before riding?",
+        "answer": "A: There's a 2-minute free inspection period. If you find problems, you can manually lock it immediately and the system won't charge."
+      },
+      "seatHeight": {
+        "question": "Q: How to adjust seat height?",
+        "answer": "A: Please refer to the operation <link>tutorial</link> on our Facebook page.",
+        "params": {
+          "link": {
+            "url": "https://www.facebook.com/watch/?v=818648818553703",
+            "target": "_blank"
+          }
+        }
+      },
+      "nightLight": {
+        "question": "Q: Do I need front and rear lights for night riding?",
+        "answer": "A: The law requires white front lights and red rear lights during night or low visibility conditions. Violations can result in HK$2,000 fine. Users can bring their own or purchase dedicated bike lights from LocoMart."
+      },
+      "multipleRentOld": {
+        "question": "Q: How many bikes can one account rent simultaneously?",
+        "answer": "A: Each phone number can only register one account and can only unlock one bike at a time for tracking and road safety."
+      },
+      "multipleRent": {
+        "question": "Q: How many bikes can I rent under one account?",
+        "answer": "A: You can now rent multiple bikes under a single account. Each bike is charged separately according to the each bike’s real time (you can rent up to 4 bikes per account)."
+      },
+      "multipleRentCharge": {
+        "question": "Q: How does my Day Pass / Monthly Pass / 90 Days Pass subscription package work when renting multiple bikes?",
+        "answer": "A: The Day Pass / Monthly Pass / 90 Days Pass only applies to the first bike rented. Any additional bikes will be charged at 1 ride credit every 30 minutes of use."
+      },
+      "multipleRentRequirement": {
+        "question": "Q: What are the requirements if I want to rent more than one bike at the same time?",
+        "answer": "A: To rent additional bikes, your account must have enough ride credits:<br></br>For 1 extra bike rental, you need at least 5 ride credits.<br></br>For 2 extra bikes rental, you need at least 10 ride credits.<br></br>For each additional bike rented, it requires 5 more ride credits per extra bike rented."
+      },
+      "parkingLocation": {
+        "question": "Q: Where can I park?",
+        "answer": "A: Public bike parking spots marked with green 'P' on the app map. If no spots are nearby, park where it doesn't affect pedestrian traffic or block traffic.<br></br><br></br>* For detailed information on fines for improperly parked bike, please refer to the <link><b>\"Rules\"</b></link>.",
+        "params": {
+          "link": {
+            "href": "/bike/tnc#credit"
+          }
+        }
+      },
+      "lockBike": {
+        "question": "Q: How to lock the bike at the end of the trip?",
+        "answer": "A: After parking, manually pull down the smart lock → Click 'Check Out' in the app → After Bluetooth connection, the system will automatically calculate the fee within about 1 minute."
+      },
+      "reportIssue": {
+        "question": "Q: How to report issues?",
+        "answer": "A: In the app, go to 'More' → 'User Report' in the bottom right, attach bike photos; or email <link>hello@loco.hk</link> with your registered phone number.",
+        "params": {
+          "link": {
+            "url": "mailto:hello@loco.hk"
+          }
+        }
+      },
+      "cyclingTips": {
+        "question": "Q: What precautions should be taken when cycling?",
+        "answer": "A: Please refer to <link><b>《Cycling Safety Tips》</b></link>.",
+        "params": {
+          "link": {
+            "href": "/bike/cycling-tips"
+          }
+        }
+      },
+      "whatIsHarbourGo": {
+        "question": "Q: What is Harbour Go?",
+        "answer": "A: Harbour Go is a shared bike service under LocoBike, available across Kowloon and Hong Kong Island, with designated parking spots. Users can enjoy 24-hour self-service bike rentals through the LocoBike App, with no cash required, allowing convenient and flexible cycling anytime, anywhere."
+      },
+      "howToUseHarbourGo": {
+        "question": "Q: How to use Harbour Go?",
+        "answer": "A: <br></br>1. Switch to Harbour Go mode: Open the LocoBike App, tap the Harbour Go icon at the top right corner of the \"Bike\" page to switch to Harbour Go mode. You can then locate Harbour Go bikes and designated parking spots on the map.<br></br>2. Scan the QR code on the Harbour Go bike using the LocoBike App to unlock and start riding."
+      }
+    },
+    "footer": "If you have any further questions, please contact our customer service team."
+  }
+}
