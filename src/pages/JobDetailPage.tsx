@@ -183,75 +183,89 @@ export function JobDetailPage() {
             alignItems: "start",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", order: 1 }}>
-            {job.overview && (
-              <Section title="職位概覽">
-                <p
-                  style={{
-                    fontFamily: "var(--font-family-roboto)",
-                    fontSize: "var(--text-base)",
-                    color: "var(--foreground)",
-                    lineHeight: "1.8",
-                    margin: 0,
-                  }}
-                >
-                  {job.overview}
-                </p>
-              </Section>
-            )}
-
-            <Section title="職責">
-              <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {job.responsibilities.map((item, i) => (
-                  <li
-                    key={i}
+          <div style={{ display: "flex", flexDirection: "column", order: 1 }}>
+            <p
+              style={{
+                fontFamily: "var(--font-family-roboto)",
+                fontSize: "var(--text-label)",
+                fontWeight: "var(--font-weight-medium)",
+                color: "var(--colour\\/grey\\/500, #515151)",
+                lineHeight: "1.5",
+                margin: "0 0 1.25rem",
+              }}
+            >
+              Posted on 30/9/2026
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+              {job.overview && (
+                <Section title="職位概覽">
+                  <p
                     style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "0.75rem",
                       fontFamily: "var(--font-family-roboto)",
                       fontSize: "var(--text-base)",
                       color: "var(--foreground)",
-                      lineHeight: "1.7",
+                      lineHeight: "1.8",
+                      margin: 0,
                     }}
                   >
-                    <CheckCircle2 size={18} style={{ color: "var(--primary)", flexShrink: 0, marginTop: "3px" }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Section>
+                    {job.overview}
+                  </p>
+                </Section>
+              )}
 
-            <Section title="要求">
-              <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {job.requirements.map((item, i) => (
-                  <li
-                    key={i}
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "0.75rem",
-                      fontFamily: "var(--font-family-roboto)",
-                      fontSize: "var(--text-base)",
-                      color: "var(--foreground)",
-                      lineHeight: "1.7",
-                    }}
-                  >
-                    <span
+              <Section title="職責">
+                <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                  {job.responsibilities.map((item, i) => (
+                    <li
+                      key={i}
                       style={{
-                        flexShrink: 0,
-                        width: "6px",
-                        height: "6px",
-                        borderRadius: "50%",
-                        backgroundColor: "var(--primary)",
-                        marginTop: "10px",
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: "0.75rem",
+                        fontFamily: "var(--font-family-roboto)",
+                        fontSize: "var(--text-base)",
+                        color: "var(--foreground)",
+                        lineHeight: "1.7",
                       }}
-                    />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Section>
+                    >
+                      <CheckCircle2 size={18} style={{ color: "var(--primary)", flexShrink: 0, marginTop: "3px" }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+
+              <Section title="要求">
+                <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                  {job.requirements.map((item, i) => (
+                    <li
+                      key={i}
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: "0.75rem",
+                        fontFamily: "var(--font-family-roboto)",
+                        fontSize: "var(--text-base)",
+                        color: "var(--foreground)",
+                        lineHeight: "1.7",
+                      }}
+                    >
+                      <span
+                        style={{
+                          flexShrink: 0,
+                          width: "6px",
+                          height: "6px",
+                          borderRadius: "50%",
+                          backgroundColor: "var(--primary)",
+                          marginTop: "10px",
+                        }}
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+            </div>
           </div>
 
           {/* Sidebar */}
